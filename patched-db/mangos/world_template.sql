@@ -38,9 +38,9 @@ CREATE TABLE `world_template` (
 
 LOCK TABLES `world_template` WRITE;
 /*!40000 ALTER TABLE `world_template` DISABLE KEYS */;
+INSERT INTO `world_template` (`map`, `ScriptName`) VALUES (530,'world_map_outland');
 INSERT INTO `world_template` (`map`, `ScriptName`) VALUES (1,'world_map_kalimdor');
 INSERT INTO `world_template` (`map`, `ScriptName`) VALUES (0,'world_map_eastern_kingdoms');
-INSERT INTO `world_template` (`map`, `ScriptName`) VALUES (530,'world_map_outland');
 INSERT INTO `world_template` (`map`, `ScriptName`) VALUES (571,'world_map_northrend');
 INSERT INTO `world_template` (`map`, `ScriptName`) VALUES (609,'world_map_ebon_hold');
 /*!40000 ALTER TABLE `world_template` ENABLE KEYS */;
