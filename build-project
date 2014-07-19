@@ -1,0 +1,95 @@
+#!/bin/sh
+
+# Unity Linux Build Script
+# Copyright 2011-2014 UnityCore
+
+cd patched-base
+
+/bin/echo -ne "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBuilding Patched Core...\n\n"
+
+if [ ${1} ]; then
+  CLIFLAGS="${1}"
+else
+  CLIFLAGS=""
+fi
+
+/bin/echo -ne "Target Directory [$HOME]? "
+read TDIR
+
+if [ ! $TDIR ]; then
+  TDIR=$HOME
+fi
+
+/bin/echo -ne "Number of Cores for Build [1]? "
+read BCORES
+
+if [ ! $BCORES ]; then
+  BCORES="1"
+fi
+
+if [ $BCORES = "1" ]; then
+  MAKECMD="make"
+else
+  MAKECMD="make -j${BCORES}"
+fi
+/bin/echo -ne "\n"
+
+if [ ! -d build ]; then
+  mkdir build
+  cd build
+  CMAKECMD="cmake ../ -DCMAKE_INSTALL_PREFIX=$TDIR -DPCH=0 -DDEBUG=0 -DINCLUDE_BINDINGS_DIR=scriptdev2 -DUSE_STD_MALLOC=1 -DACE_USE_EXTERNAL=1 $CLIFLAGS"
+  $CMAKECMD
+else
+  echo ""
+  /bin/echo -ne "Rebuild from existing object files (Y/n)? "
+  read REBUILD
+  if [ ! $REBUILD ]; then
+    REBUILD="Y"
+  else
+    REBUILD=`echo $REBUILD | tr '[:lower:]' '[:upper:]'`
+  fi
+  if [ $REBUILD = "Y" ]; then  
+    cd build
+  else
+    rm -rf build
+    mkdir build
+    cd build
+    CMAKECMD="cmake ../ -DCMAKE_INSTALL_PREFIX=$TDIR -DPCH=0 -DDEBUG=0 -DINCLUDE_BINDINGS_DIR=scriptdev2 -DUSE_STD_MALLOC=1 -DACE_USE_EXTERNAL=1 $CLIFLAGS"
+    $CMAKECMD
+  fi 
+fi 
+
+echo ""
+/bin/echo -ne "Install when build completed (Y/n)? "
+read INSTBUILD
+if [ ! $INSTBUILD ]; then
+  INSTBUILD="Y"
+else
+  INSTBUILD=`echo $REBUILD | tr '[:lower:]' '[:upper:]'`
+fi
+if [ $INSTBUILD = "Y" ]; then
+  MAKECMD=`echo $MAKECMD install`
+else
+  INSTBUILD="N"
+fi
+
+$MAKECMD
+
+if [ $INSTBUILD = "N" ]; then
+  /bin/echo -ne "\n\nRun Install (y/N)? "
+  read RUNINSTALL
+
+  if [ $RUNINSTALL ]; then
+    RUNINSTALL=`echo $RUNINSTALL | tr '[:lower:]' '[:upper:]'`
+  else
+    RUNINSTALL="N"
+  fi
+
+  if [ $RUNINSTALL = "Y" ]; then
+    make install
+  fi
+fi
+
+/bin/echo -ne "*** Build Complete ***\n\nCheck console for errors.\n\n"
+
+#EOF
