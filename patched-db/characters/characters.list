@@ -62,5 +62,9 @@ pet_spell
 pet_spell_cooldown             
 petition                       
 petition_sign                  
+playerbot_quest_data           
+playerbot_saved_data           
+playerbot_talentspec           
+playerbotai_db_version         
 saved_variables                
 world                          
