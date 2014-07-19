@@ -58,6 +58,7 @@ gameobject_battleground
 gameobject_involvedrelation       
 gameobject_loot_template          
 gameobject_questrelation          
+gameobject_teleports              
 gameobject_template               
 gossip_menu                       
 gossip_menu_option                

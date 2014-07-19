@@ -1,13 +1,5 @@
-# HG changeset patch
-# User Unity
-# Date 1405788613 14400
-# Node ID 28422d4c9ca08c5dc80ea1d2bead762c3dc4bfad
-# Parent  ba41357756628364447abe78b0e675aca7496030
-Mod playerbot to not show inventory on mouse-over in patched-base.
-
-diff --git a/patched-base/src/game/playerbot/PlayerbotMgr.cpp b/patched-base/src/game/playerbot/PlayerbotMgr.cpp
---- a/patched-base/src/game/playerbot/PlayerbotMgr.cpp
-+++ b/patched-base/src/game/playerbot/PlayerbotMgr.cpp
+--- ../../portal/src/game/playerbot/PlayerbotMgr.cpp	2014-07-06 12:14:56.000000000 -0400
++++ src/game/playerbot/PlayerbotMgr.cpp	2014-07-19 16:57:35.000000000 -0400
 @@ -288,12 +288,14 @@
          // such as inventory that can be equipped
      case CMSG_INSPECT:
@@ -23,7 +15,7 @@ diff --git a/patched-base/src/game/playerbot/PlayerbotMgr.cpp b/patched-base/src
              return;
          }
  
-@@ -379,6 +381,18 @@
+@@ -379,6 +381,15 @@
                      return;
                  }
  
@@ -31,15 +23,11 @@ diff --git a/patched-base/src/game/playerbot/PlayerbotMgr.cpp b/patched-base/src
 +            // emote to show inventory that can be equipped
 +            case TEXTEMOTE_CURIOUS:
 +                {
-+                    WorldPacket p(packet);
-+                    p.rpos(0); // reset reader
-+                    ObjectGuid guid;
-+                    p >> guid;
-+                    Player* const bot = GetPlayerBot(guid);
-+                    if (bot) bot->GetPlayerbotAI()->SendNotEquipList(*bot);
++                    Player* const bot = GetPlayerBot(m_master->GetSelectionGuid());
++                    if (bot) 
++                        bot->GetPlayerbotAI()->SendNotEquipList(*bot);
 +                }
 +
                  // emote to attack selected target
              case TEXTEMOTE_POINT:
                  {
-

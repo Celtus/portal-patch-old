@@ -385,12 +385,9 @@ void PlayerbotMgr::HandleMasterIncomingPacket(const WorldPacket& packet)
             // emote to show inventory that can be equipped
             case TEXTEMOTE_CURIOUS:
                 {
-                    WorldPacket p(packet);
-                    p.rpos(0); // reset reader
-                    ObjectGuid guid;
-                    p >> guid;
-                    Player* const bot = GetPlayerBot(guid);
-                    if (bot) bot->GetPlayerbotAI()->SendNotEquipList(*bot);
+                    Player* const bot = GetPlayerBot(m_master->GetSelectionGuid());
+                    if (bot) 
+                        bot->GetPlayerbotAI()->SendNotEquipList(*bot);
                 }
 
                 // emote to attack selected target

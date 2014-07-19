@@ -1191,6 +1191,41 @@ void GameObject::Use(Unit* user)
             {
                 Player* player = (Player*)user;
 
+                // GameObject Teleports
+                uint32 go_guid, mapidt, phaset, required_level;
+                float xt,yt,zt,orientationt;
+
+                QueryResult *result = NULL;
+                std::ostringstream qry;
+                qry << "SELECT * FROM gameobject_teleports WHERE entry = " << info->id;
+                result = WorldDatabase.Query(qry.str( ).c_str( ));
+                if(result != NULL)
+                {
+                    Field *fields = result->Fetch();
+                    required_level = fields[6].GetInt32();
+
+                    if ((required_level == 0) || (required_level <= player->getLevel()))
+                    {
+                        go_guid = fields[0].GetUInt32();
+                        mapidt = fields[1].GetUInt32();
+                        xt = fields[2].GetFloat();
+                        yt = fields[3].GetFloat();
+                        zt = fields[4].GetFloat();
+                        orientationt = fields[5].GetFloat();
+                        phaset = fields[7].GetUInt32();
+
+                        player->TeleportTo(mapidt, xt, yt, zt, orientationt, TELE_TO_NOT_LEAVE_TRANSPORT | TELE_TO_NOT_LEAVE_COMBAT | TELE_TO_NOT_UNSUMMON_PET);
+                        sLog.outString("GO Teleport Activated: %u,%u,%f,%f,%f,%f,%u", go_guid, mapidt, xt, xt, zt, orientationt, phaset);
+                        if (phaset > 0)
+                        {
+                            // Modify player phase
+                            player->SetPhaseMask(phaset, true);
+                        }
+                    }
+                delete result;
+                }
+                // End - GameObject Teleports
+
                 if (info->goober.pageId)                    // show page...
                 {
                     WorldPacket data(SMSG_GAMEOBJECT_PAGETEXT, 8);
