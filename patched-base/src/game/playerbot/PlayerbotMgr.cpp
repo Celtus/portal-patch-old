@@ -288,12 +288,14 @@ void PlayerbotMgr::HandleMasterIncomingPacket(const WorldPacket& packet)
         // such as inventory that can be equipped
     case CMSG_INSPECT:
         {
+            /* >>> Moved to textemote /curious - was too annoying
             WorldPacket p(packet);
             p.rpos(0); // reset reader
             ObjectGuid guid;
             p >> guid;
             Player* const bot = GetPlayerBot(guid);
             if (bot) bot->GetPlayerbotAI()->SendNotEquipList(*bot);
+            */
             return;
         }
 
@@ -377,6 +379,18 @@ void PlayerbotMgr::HandleMasterIncomingPacket(const WorldPacket& packet)
                         bot->GetPlayerbotAI()->Feast();
                     }
                     return;
+                }
+
+
+            // emote to show inventory that can be equipped
+            case TEXTEMOTE_CURIOUS:
+                {
+                    WorldPacket p(packet);
+                    p.rpos(0); // reset reader
+                    ObjectGuid guid;
+                    p >> guid;
+                    Player* const bot = GetPlayerBot(guid);
+                    if (bot) bot->GetPlayerbotAI()->SendNotEquipList(*bot);
                 }
 
                 // emote to attack selected target
