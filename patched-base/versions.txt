@@ -1,0 +1,23 @@
+Codebase Versions
+
+Portal Current:
+Commit: eeb5a5cebbc850a0ca2af4983134b69f99e199ce
+Date  : Mon Jun 9 00:12:07 2014 +0100
+Base  : CMaNGOS 12669 (https://github.com/cmangos/mangos-wotlk.git)
+Repo  : https://github.com/blueboy/portal.git
+
+ScriptDev2 Current:
+Commit: b75eeb15e1472b15341167295d22b1635d1999cf
+Date  : Sun Jun 22 22:19:57 2014 +0200
+Repo  : https://github.com/scriptdev2/scriptdev2.git
+
+UnifiedDB Current:
+Commit: r406
+Date  : 2013-04-07 14:58:48 -0400
+Repo  : https://svn.code.sf.net/p/unifieddb/code/trunk
+
+ACID Current:
+Commit: bd0f8f0b26afc1d1c3e37f4fda76dfdbe61b1ef6
+Date  : Mon Jul 14 00:21:45 2014 +0300
+Repo  : https://github.com/scriptdev2/acid.git
+
