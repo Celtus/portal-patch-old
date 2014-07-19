@@ -38,6 +38,12 @@ CREATE TABLE `item_expire_convert` (
 
 LOCK TABLES `item_expire_convert` WRITE;
 /*!40000 ALTER TABLE `item_expire_convert` DISABLE KEYS */;
+INSERT INTO `item_expire_convert` (`entry`, `item`) VALUES (44623,44625);
+INSERT INTO `item_expire_convert` (`entry`, `item`) VALUES (39878,39883);
+INSERT INTO `item_expire_convert` (`entry`, `item`) VALUES (44625,44627);
+INSERT INTO `item_expire_convert` (`entry`, `item`) VALUES (44632,44626);
+INSERT INTO `item_expire_convert` (`entry`, `item`) VALUES (44626,44629);
+INSERT INTO `item_expire_convert` (`entry`, `item`) VALUES (44717,44718);
 /*!40000 ALTER TABLE `item_expire_convert` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

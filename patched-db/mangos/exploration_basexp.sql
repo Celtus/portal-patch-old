@@ -108,7 +108,7 @@ INSERT INTO `exploration_basexp` (`level`, `basexp`) VALUES (66,1130);
 INSERT INTO `exploration_basexp` (`level`, `basexp`) VALUES (67,1160);
 INSERT INTO `exploration_basexp` (`level`, `basexp`) VALUES (68,1200);
 INSERT INTO `exploration_basexp` (`level`, `basexp`) VALUES (69,1230);
-INSERT INTO `exploration_basexp` (`level`, `basexp`) VALUES (70,1250);
+INSERT INTO `exploration_basexp` (`level`, `basexp`) VALUES (70,1300);
 /*!40000 ALTER TABLE `exploration_basexp` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

@@ -29,7 +29,7 @@ CREATE TABLE `item_convert` (
   `entry` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `item` mediumint(8) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`entry`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='Item Convert System';
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='Npc System';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,6 +38,16 @@ CREATE TABLE `item_convert` (
 
 LOCK TABLES `item_convert` WRITE;
 /*!40000 ALTER TABLE `item_convert` DISABLE KEYS */;
+INSERT INTO `item_convert` (`entry`, `item`) VALUES (50338,44135);
+INSERT INTO `item_convert` (`entry`, `item`) VALUES (50337,44136);
+INSERT INTO `item_convert` (`entry`, `item`) VALUES (50335,44133);
+INSERT INTO `item_convert` (`entry`, `item`) VALUES (50336,44134);
+INSERT INTO `item_convert` (`entry`, `item`) VALUES (50370,44152);
+INSERT INTO `item_convert` (`entry`, `item`) VALUES (50367,44149);
+INSERT INTO `item_convert` (`entry`, `item`) VALUES (50368,44159);
+INSERT INTO `item_convert` (`entry`, `item`) VALUES (50369,44150);
+INSERT INTO `item_convert` (`entry`, `item`) VALUES (50372,44701);
+INSERT INTO `item_convert` (`entry`, `item`) VALUES (50373,44702);
 /*!40000 ALTER TABLE `item_convert` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

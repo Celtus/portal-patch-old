@@ -39,7 +39,7 @@ CREATE TABLE `db_version` (
 
 LOCK TABLES `db_version` WRITE;
 /*!40000 ALTER TABLE `db_version` DISABLE KEYS */;
-INSERT INTO `db_version` (`version`, `creature_ai_version`, `cache_id`, `required_12654_01_mangos_creature_template_power`) VALUES ('Mangos default database.','Creature EventAI not provided.',0,NULL);
+INSERT INTO `db_version` (`version`, `creature_ai_version`, `cache_id`, `required_12654_01_mangos_creature_template_power`) VALUES ('UDB 0.12.2 (406) for CMaNGOS 12444 with SD2 SQL for rev. 2857','ACID 3.1.0 \'Another Wild Adventure\' - Full Release for CMaNGOS (3.3.5a Client)',406,NULL);
 /*!40000 ALTER TABLE `db_version` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

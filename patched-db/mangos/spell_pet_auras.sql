@@ -27,11 +27,11 @@ DROP TABLE IF EXISTS `spell_pet_auras`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `spell_pet_auras` (
   `spell` mediumint(8) unsigned NOT NULL COMMENT 'dummy spell id',
-  `effectId` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `effectId` tinyint(3) unsigned NOT NULL,
   `pet` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT 'pet id; 0 = all',
   `aura` mediumint(8) unsigned NOT NULL COMMENT 'pet aura id',
   PRIMARY KEY (`spell`,`effectId`,`pet`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -49,16 +49,6 @@ INSERT INTO `spell_pet_auras` (`spell`, `effectId`, `pet`, `aura`) VALUES (35030
 INSERT INTO `spell_pet_auras` (`spell`, `effectId`, `pet`, `aura`) VALUES (35691,0,0,35696);
 INSERT INTO `spell_pet_auras` (`spell`, `effectId`, `pet`, `aura`) VALUES (35692,0,0,35696);
 INSERT INTO `spell_pet_auras` (`spell`, `effectId`, `pet`, `aura`) VALUES (35693,0,0,35696);
-INSERT INTO `spell_pet_auras` (`spell`, `effectId`, `pet`, `aura`) VALUES (56314,0,0,57447);
-INSERT INTO `spell_pet_auras` (`spell`, `effectId`, `pet`, `aura`) VALUES (56314,1,0,57485);
-INSERT INTO `spell_pet_auras` (`spell`, `effectId`, `pet`, `aura`) VALUES (56315,0,0,57452);
-INSERT INTO `spell_pet_auras` (`spell`, `effectId`, `pet`, `aura`) VALUES (56315,1,0,57484);
-INSERT INTO `spell_pet_auras` (`spell`, `effectId`, `pet`, `aura`) VALUES (56316,0,0,57453);
-INSERT INTO `spell_pet_auras` (`spell`, `effectId`, `pet`, `aura`) VALUES (56316,1,0,57483);
-INSERT INTO `spell_pet_auras` (`spell`, `effectId`, `pet`, `aura`) VALUES (56317,0,0,57457);
-INSERT INTO `spell_pet_auras` (`spell`, `effectId`, `pet`, `aura`) VALUES (56317,1,0,57482);
-INSERT INTO `spell_pet_auras` (`spell`, `effectId`, `pet`, `aura`) VALUES (56318,0,0,57458);
-INSERT INTO `spell_pet_auras` (`spell`, `effectId`, `pet`, `aura`) VALUES (56318,1,0,57475);
 INSERT INTO `spell_pet_auras` (`spell`, `effectId`, `pet`, `aura`) VALUES (23785,0,416,23759);
 INSERT INTO `spell_pet_auras` (`spell`, `effectId`, `pet`, `aura`) VALUES (23822,0,416,23826);
 INSERT INTO `spell_pet_auras` (`spell`, `effectId`, `pet`, `aura`) VALUES (23823,0,416,23827);
@@ -84,6 +74,16 @@ INSERT INTO `spell_pet_auras` (`spell`, `effectId`, `pet`, `aura`) VALUES (23822
 INSERT INTO `spell_pet_auras` (`spell`, `effectId`, `pet`, `aura`) VALUES (23823,0,17252,35704);
 INSERT INTO `spell_pet_auras` (`spell`, `effectId`, `pet`, `aura`) VALUES (23824,0,17252,35705);
 INSERT INTO `spell_pet_auras` (`spell`, `effectId`, `pet`, `aura`) VALUES (23825,0,17252,35706);
+INSERT INTO `spell_pet_auras` (`spell`, `effectId`, `pet`, `aura`) VALUES (56314,0,0,57447);
+INSERT INTO `spell_pet_auras` (`spell`, `effectId`, `pet`, `aura`) VALUES (56314,1,0,57485);
+INSERT INTO `spell_pet_auras` (`spell`, `effectId`, `pet`, `aura`) VALUES (56315,0,0,57452);
+INSERT INTO `spell_pet_auras` (`spell`, `effectId`, `pet`, `aura`) VALUES (56315,1,0,57484);
+INSERT INTO `spell_pet_auras` (`spell`, `effectId`, `pet`, `aura`) VALUES (56316,0,0,57453);
+INSERT INTO `spell_pet_auras` (`spell`, `effectId`, `pet`, `aura`) VALUES (56316,1,0,57483);
+INSERT INTO `spell_pet_auras` (`spell`, `effectId`, `pet`, `aura`) VALUES (56317,0,0,57457);
+INSERT INTO `spell_pet_auras` (`spell`, `effectId`, `pet`, `aura`) VALUES (56317,1,0,57482);
+INSERT INTO `spell_pet_auras` (`spell`, `effectId`, `pet`, `aura`) VALUES (56318,0,0,57458);
+INSERT INTO `spell_pet_auras` (`spell`, `effectId`, `pet`, `aura`) VALUES (56318,1,0,57475);
 INSERT INTO `spell_pet_auras` (`spell`, `effectId`, `pet`, `aura`) VALUES (58228,0,19668,57989);
 /*!40000 ALTER TABLE `spell_pet_auras` ENABLE KEYS */;
 UNLOCK TABLES;

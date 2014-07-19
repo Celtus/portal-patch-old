@@ -31,7 +31,7 @@ CREATE TABLE `pet_name_generation` (
   `entry` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `half` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=261 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=314 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -300,6 +300,59 @@ INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (257,'g
 INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (258,'roon',17252,1);
 INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (259,'thun',17252,1);
 INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (260,'tom',17252,1);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (261,'Stone',26125,0);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (262,'Stone',26125,0);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (263,'Eye',26125,0);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (264,'Dirt',26125,0);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (265,'Blight',26125,0);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (266,'Bat',26125,0);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (267,'Rat',26125,0);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (268,'Corpse',26125,0);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (269,'Grave',26125,0);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (270,'Carrion',26125,0);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (271,'Skull',26125,0);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (272,'Bone',26125,0);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (273,'Crypt',26125,0);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (274,'Rib',26125,0);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (275,'Brain',26125,0);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (276,'Tomb',26125,0);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (277,'Rot',26125,0);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (278,'Gravel',26125,0);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (279,'Plague',26125,0);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (280,'Casket',26125,0);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (281,'Limb',26125,0);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (282,'Worm',26125,0);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (283,'Earth',26125,0);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (284,'Spine',26125,0);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (285,'Pebble',26125,0);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (286,'Root',26125,0);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (287,'Marrow',26125,0);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (288,'Hammer',26125,0);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (289,'ravager',26125,1);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (290,'muncher',26125,1);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (291,'cruncher',26125,1);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (292,'masher',26125,1);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (293,'leaper',26125,1);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (294,'grinder',26125,1);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (295,'stalker',26125,1);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (296,'gobbler',26125,1);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (297,'feeder',26125,1);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (298,'basher',26125,1);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (299,'chewer',26125,1);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (300,'ripper',26125,1);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (301,'slicer',26125,1);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (302,'gnaw',26125,1);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (303,'flayer',26125,1);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (304,'rumbler',26125,1);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (305,'chomp',26125,1);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (306,'breaker',26125,1);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (307,'keeper',26125,1);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (308,'rawler',26125,1);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (309,'stealer',26125,1);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (310,'thief',26125,1);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (311,'catcher',26125,1);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (312,'drinker',26125,1);
+INSERT INTO `pet_name_generation` (`id`, `word`, `entry`, `half`) VALUES (313,'slicer',26125,1);
 /*!40000 ALTER TABLE `pet_name_generation` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
