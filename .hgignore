@@ -1,8 +1,8 @@
 # use glob syntax
 syntax: glob
 
-patched-core/build/
-base/
+patched-base/build/
+database-orig/
 *.orig
 *.rej
 *.bak
