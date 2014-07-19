@@ -38,11 +38,11 @@ if(PCHSupport_FOUND AND WIN32) # TODO: why only enable it on windows by default?
 else()
   option(PCH                "Use precompiled headers"               OFF)
 endif()
+option(TOOLS                "Build Tools"                           ON)
 # TODO: options that should be checked/created:
 #option(CLI                  "With CLI"                              ON)
 #option(RA                   "With Remote Access"                    OFF)
 #option(SQL                  "Copy SQL files"                        OFF)
-#option(TOOLS                "Build tools"                           OFF)
 
 # Output description of this script
 message("")
@@ -59,6 +59,7 @@ message(
     TBB_USE_EXTERNAL        Use external TBB
     USE_STD_MALLOC          Use standard malloc instead of TBB
     ACE_USE_EXTERNAL        Use external ACE
+    TOOLS                   Build dbc/map/vmap/mmap extraction tools
   To set an option simply type -D<OPTION>=<VALUE> after 'cmake <srcs>'.
   Also, you can specify the generator with -G. see 'cmake --help' for more details
   For example: cmake .. -DDEBUG=1 -DCMAKE_INSTALL_PREFIX=/opt/mangos"
@@ -306,11 +307,12 @@ endif()
 #   message(STATUS "Install SQL-files     : No  (default)")
 # endif()
 
-# if(TOOLS)
-#   message(STATUS "Build map/vmap tools  : Yes")
-# else()
-#   message(STATUS "Build map/vmap tools  : No  (default)")
-# endif()
+if(TOOLS)
+   message(STATUS "Build map/vmap tools  : Yes (default)")
+   add_subdirectory(maptools)
+else()
+   message(STATUS "Build map/vmap tools  : No")
+endif()
 
 # Some small tweaks for Visual Studio 7 and above.
 if(MSVC)
