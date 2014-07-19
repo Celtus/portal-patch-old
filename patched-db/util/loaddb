@@ -1,0 +1,22 @@
+#!/bin/sh
+
+#
+# loaddb
+# Database loading utility.
+#
+# Copyright (C) 2013-2014 Unity <http://unitycore.org/>
+#
+
+if [ $# -lt 4 ]; then
+  echo "usage: $0 DBUSERNAME DBPASSWORD DATABASE DIRECTORY"
+  exit 1
+fi
+
+cd ${4}
+
+for SQL_FILE in `ls -1 *.sql`
+do
+  mysql -u $1 -p$2 $3 < $SQL_FILE
+done
+
+# EOF

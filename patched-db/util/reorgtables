@@ -1,0 +1,36 @@
+#!/bin/sh
+
+#
+# reorgtables
+# Development full-database reorg utility.
+#
+# Copyright (C) 2013-2014 Unity <http://unitycore.org/>
+#
+
+if [ $# -lt 4 ]; then
+  echo "usage: $0 DBUSER DBPASS DATABASE_NAME DIRECTORY_NAME"
+  exit 1
+fi
+
+# Get db credentials
+DBUSER=${1}
+DBPASS=${2}
+
+# Get db name
+DBNAME=${3}
+
+# Get dir name
+DIRNAME=${4}
+
+echo "Database: $DBNAME"
+
+DBNAMELIST="$DIRNAME.list"
+
+echo "List    : $DBNAMELIST"
+
+for TABLENAME in `cat $DIRNAME/$DBNAMELIST`
+do
+  util/reorgtable $DBUSER $DBPASS $DBNAME $TABLENAME
+done
+
+# EOF

@@ -1,0 +1,54 @@
+#!/bin/sh
+
+#
+# dumptable
+# Development clean database table dump utility.
+#
+# Copyright (C) 2013-2014 Unity <http://unitycore.org/>
+#
+
+if [ $# -lt 4 ]; then
+  echo "usage: $0 DBUSER DBPASS DIRECTORY_NAME DATABASE_NAME TABLE_NAME"
+  exit 1
+fi
+
+# Get db credentials
+DBUSER=${1}
+DBPASS=${2}
+
+# Get dir name
+DIRNAME=${3}
+
+# Get db name
+DBNAME=${4}
+
+# Get table name
+TABLENAME=${5}
+
+echo "Saving $TABLENAME"
+if [ -f $DIRNAME/$TABLENAME.sql ]; then
+  rm $DIRNAME/$TABLENAME.sql
+fi
+mysqldump --skip-extended-insert -c -u $DBUSER -p$DBPASS $DBNAME $TABLENAME > /tmp/$TABLENAME.sql
+# Clean up sql
+SQLLINES=`wc -l /tmp/$TABLENAME.sql | awk '{print $1}'`
+SQLHEAD=6
+SQLTAIL=2
+SQLBODY1=`expr $SQLLINES - $SQLTAIL`
+SQLBODY2=`expr $SQLBODY1 - $SQLHEAD`
+echo "-- -------------------------------------------------------------------" > $DIRNAME/$TABLENAME.sql
+echo "-- Database" >> $DIRNAME/$TABLENAME.sql
+echo "-- -------------------------------------------------------------------" >> $DIRNAME/$TABLENAME.sql
+echo "" >> $DIRNAME/$TABLENAME.sql 
+echo "-- Table      : $TABLENAME" >> $DIRNAME/$TABLENAME.sql
+echo "-- Filename   : $TABLENAME.sql" >> $DIRNAME/$TABLENAME.sql
+echo "" >> $DIRNAME/$TABLENAME.sql
+echo "-- -------------------------------------------------------------------" >> $DIRNAME/$TABLENAME.sql
+echo "" >> $DIRNAME/$TABLENAME.sql
+head -$SQLBODY1 /tmp/$TABLENAME.sql | tail -n $SQLBODY2 >> $DIRNAME/$TABLENAME.sql
+echo "" >> $DIRNAME/$TABLENAME.sql
+echo "-- End-Of-File: $TABLENAME.sql" >> $DIRNAME/$TABLENAME.sql
+echo "" >> $DIRNAME/$TABLENAME.sql
+rm /tmp/$TABLENAME.sql
+
+# EOF

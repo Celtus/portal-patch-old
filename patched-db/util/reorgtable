@@ -1,0 +1,45 @@
+#!/bin/sh
+
+#
+# reorg
+# Development database table reorg utility.
+#
+# Copyright (C) 2013-2014 Unity <http://unitycore.org/>
+#
+
+if [ $# -lt 4 ]; then
+  echo "usage: $0 DBUSER DBPASS DATABASE_NAME TABLE_NAME"
+  exit 1
+fi
+
+# Get db credentials
+DBUSER=${1}
+DBPASS=${2}
+DBNAME=${3}
+
+# Get table name
+TBLNAME=${4}
+
+rm -rf /tmp/keys-$$.txt
+
+for TBLKEY in `echo "SHOW INDEXES IN $TBLNAME;" | mysql -u $DBUSER -p$DBPASS $DBNAME | grep -v Non_unique | awk '{print $5}'`
+do
+  if [ $COUNTER ]; then
+    /bin/echo -ne "," >> /tmp/keys-$$.txt
+  fi
+  /bin/echo -ne "\`$TBLKEY\`" >> /tmp/keys-$$.txt
+  COUNTER=1
+done
+
+if [ -f /tmp/keys-$$.txt ]; then
+  REORGSQL="ALTER TABLE \`$TBLNAME\` ORDER BY `cat /tmp/keys-$$.txt` ASC;"
+  echo "Running : $REORGSQL"
+  echo $REORGSQL | mysql -u $DBUSER -p$DBPASS $DBNAME
+else
+  REORGSQL="-- ALTER TABLE \`$TBLNAME\`;"
+  echo "Bypass  : $TBLNAME"
+fi
+
+rm -rf /tmp/keys-$$.txt
+
+# EOF
