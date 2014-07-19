@@ -1,9 +1,25 @@
 #/bin/bash
 
+echo ""
 echo "$0"
 echo "This script will fetch the current versions of the source code,"
 echo "separate the database from the codebase, and scrub the directories"
 echo "to create a clean base for merging."
+
+# If portal has open issues, it may be necessary to pull a particular rev
+REQPORTAL="eeb5a5cebbc850a0ca2af4983134b69f99e199ce"
+# If portal is behind mangos, it may be necessary to pull a particular sd2 rev
+REQSD2="b75eeb15e1472b15341167295d22b1635d1999cf"
+# If a particular UDB is required... 
+REQUDB="406"
+# If acid is sync'd to a later mangos or udb, it may be necessary to pul a particular rev
+REQACID="bd0f8f0b26afc1d1c3e37f4fda76dfdbe61b1ef6"
+
+if [ $REQPORTAL != "" -o $REQSD2 != "" -o $REQUDB != "" -o $REQACID != "" ]; then
+  echo ""
+  echo "NOTICE: Version overrides have been defined!"
+  echo ""
+fi
 
 CDIR=`pwd`
 CLDIR=`echo $CDIR | awk -F\/ '{print $NF}'`
@@ -24,7 +40,7 @@ VLOG="versions.txt"
 PORTALR="https://github.com/blueboy/portal.git"
 MANGOSR="https://github.com/cmangos/mangos-wotlk.git"
 SD2R="https://github.com/scriptdev2/scriptdev2.git"
-UDBR="https://svn.code.sf.net/p/unifieddb/code/trunk/"
+UDBR="https://svn.code.sf.net/p/unifieddb/code/trunk"
 ACIDR="https://github.com/scriptdev2/acid.git"
 
 echo ""
@@ -37,6 +53,9 @@ echo ""
 echo "Fetching portal..."
 git clone $PORTALR
 cd portal
+if [ $REQPORTAL != "" ]; then
+  git checkout $REQPORTAL
+fi
 git log | head -4 > ../portal.status
 LASTMANGOS=`git log | grep "\[" | grep "\]" | head -1 | awk '{print $1}' | tr -d "[" | tr -d "]"`
 rm -rf .git*
@@ -48,6 +67,9 @@ echo "Fetching ScriptDev2..."
 cd portal/src/bindings
 git clone $SD2R
 cd scriptdev2
+if [ $REQSD2 != "" ]; then
+  git checkout $REQSD2
+fi
 git log | head -4 > ../../../../scriptdev2.status
 rm -rf .git*
 mv sql ../../../../database/sd2
@@ -56,7 +78,11 @@ echo ""
 
 echo "Fetching UDB..."
 cd database
-svn co $UDBR 
+if [ $REQUDB != "" ]; then
+  svn co $UDBR -r $REQUDB
+else
+  svn co $UDBR
+fi
 mv trunk udb
 cd udb
 svn log | head -2 > ../../udb.status
@@ -68,6 +94,9 @@ echo "Fetching ACID..."
 cd database
 git clone $ACIDR
 cd acid
+if [ $REQACID != "" ]; then
+  git checkout $REQACID
+fi
 git log | head -4 > ../../acid.status
 rm -rf .git*
 cd ../..
