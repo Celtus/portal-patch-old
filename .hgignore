@@ -2,7 +2,6 @@
 syntax: glob
 
 patched-base/build/
-database-orig/
 *.orig
 *.rej
 *.bak
