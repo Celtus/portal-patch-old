@@ -1,0 +1,13 @@
+# use glob syntax
+syntax: glob
+
+patched-core/build/
+base/
+*.orig
+*.rej
+*.bak
+*.kdev*
+*.diff
+*.tmp
+*.temp
+*.swp

@@ -1,0 +1,128 @@
+#/bin/bash
+
+echo "$0"
+echo "This script will fetch the current versions of the source code,"
+echo "separate the database from the codebase, and scrub the directories"
+echo "to create a clean base for merging."
+
+CDIR=`pwd`
+CLDIR=`echo $CDIR | awk -F\/ '{print $NF}'`
+if [ $CLDIR = "scripts" ]; then
+  cd ..
+fi
+
+if [ -d base ]; then
+  echo ""
+  echo "ERROR: Base already exists!"
+  echo "       Remove or rename, then run this script again."
+  echo ""
+  exit 1
+fi
+
+VLOG="versions.txt"
+
+PORTALR="https://github.com/blueboy/portal.git"
+MANGOSR="https://github.com/cmangos/mangos-wotlk.git"
+SD2R="https://github.com/scriptdev2/scriptdev2.git"
+UDBR="https://svn.code.sf.net/p/unifieddb/code/trunk/"
+ACIDR="https://github.com/scriptdev2/acid.git"
+
+echo ""
+echo "Creating source codebase tree"
+mkdir base
+cd base
+mkdir database
+echo ""
+
+echo "Fetching portal..."
+git clone $PORTALR
+cd portal
+git log | head -4 > ../portal.status
+LASTMANGOS=`git log | grep "\[" | grep "\]" | head -1 | awk '{print $1}' | tr -d "[" | tr -d "]"`
+rm -rf .git*
+mv sql ../database/core
+cd ..
+echo ""
+
+echo "Fetching ScriptDev2..."
+cd portal/src/bindings
+git clone $SD2R
+cd scriptdev2
+git log | head -4 > ../../../../scriptdev2.status
+rm -rf .git*
+mv sql ../../../../database/sd2
+cd ../../../..
+echo ""
+
+echo "Fetching UDB..."
+cd database
+svn co $UDBR 
+mv trunk udb
+cd udb
+svn log | head -2 > ../../udb.status
+rm -rf .svn; rm -rf */.svn; rm -rf */*/.svn
+cd ../..
+echo ""
+
+echo "Fetching ACID..."
+cd database
+git clone $ACIDR
+cd acid
+git log | head -4 > ../../acid.status
+rm -rf .git*
+cd ../..
+echo ""
+
+echo "Codebase fetch complete!"
+echo ""
+
+echo "Codebase Versions" > $VLOG
+echo "" >> $VLOG
+
+PORTALC=`cat portal.status | grep "commit " | awk '{print $2}'`
+PORTALD=`cat portal.status | grep "Date:   " | cut -c 9-`
+echo "Portal Current:" >> $VLOG
+echo "Commit: $PORTALC" >> $VLOG
+echo "Date  : $PORTALD" >> $VLOG
+echo "Base  : CMaNGOS $LASTMANGOS ($MANGOSR)" >> $VLOG
+echo "Repo  : $PORTALR" >> $VLOG
+echo "" >> $VLOG
+
+SD2C=`cat scriptdev2.status | grep "commit " | awk '{print $2}'`
+SD2D=`cat scriptdev2.status | grep "Date:   " | cut -c 9-`
+echo "ScriptDev2 Current:" >> $VLOG
+echo "Commit: $SD2C" >> $VLOG
+echo "Date  : $SD2D" >> $VLOG
+echo "Repo  : $SD2R" >> $VLOG
+echo "" >> $VLOG
+
+UDBT=`cat udb.status | grep "lines"`
+UDBC=`echo $UDBT | awk '{print $1}'`
+UDBD=`echo $UDBT | awk '{print $5,$6,$7}'`
+echo "UnifiedDB Current:" >> $VLOG
+echo "Commit: $UDBC" >> $VLOG
+echo "Date  : $UDBD" >> $VLOG
+echo "Repo  : $UDBR" >> $VLOG
+echo "" >> $VLOG
+
+ACIDC=`cat acid.status | grep "commit " | awk '{print $2}'`
+ACIDD=`cat acid.status | grep "Date:   " | cut -c 9-`
+echo "ACID Current:" >> $VLOG
+echo "Commit: $ACIDC" >> $VLOG
+echo "Date  : $ACIDD" >> $VLOG
+echo "Repo  : $ACIDR" >> $VLOG
+echo "" >> $VLOG
+
+rm -f portal.status
+rm -f scriptdev2.status
+rm -f udb.status
+rm -f acid.status
+
+echo ""
+cat $VLOG
+echo ""
+cp $VLOG ../
+echo "Version Info Saved in $VLOG"
+echo ""
+
+# EOF
