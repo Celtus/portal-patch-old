@@ -85,6 +85,9 @@ mangos_string
 milling_loot_template             
 npc_gossip                        
 npc_spellclick_spells             
+npc_teleport_association          
+npc_teleport_category             
+npc_teleport_destination          
 npc_text                          
 npc_trainer                       
 npc_trainer_template              
