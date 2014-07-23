@@ -83,6 +83,10 @@ mail_level_reward
 mail_loot_template                
 mangos_string                     
 milling_loot_template             
+npc_codebox_aura_loot             
+npc_codebox_codes                 
+npc_codebox_item_loot             
+npc_codebox_text                  
 npc_gossip                        
 npc_spellclick_spells             
 npc_teleport_association          
