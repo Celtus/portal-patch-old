@@ -278,6 +278,7 @@ enum eConfigFloatValues
     CONFIG_FLOAT_THREAT_RADIUS,
     CONFIG_FLOAT_GHOST_RUN_SPEED_WORLD,
     CONFIG_FLOAT_GHOST_RUN_SPEED_BG,
+    CONFIG_FLOAT_RATE_PVP_RANK_EXTRA_HONOR,
     CONFIG_FLOAT_VALUE_COUNT
 };
 
@@ -361,6 +362,26 @@ enum BillingPlanFlags
     SESSION_TIME_MIXTURE    = 0x20,
     SESSION_RESTRICTED      = 0x40,
     SESSION_ENABLE_CAIS     = 0x80,
+};
+
+enum HonorKillPvPRank
+{
+    HKRANK00,
+    HKRANK01,
+    HKRANK02,
+    HKRANK03,
+    HKRANK04,
+    HKRANK05,
+    HKRANK06,
+    HKRANK07,
+    HKRANK08,
+    HKRANK09,
+    HKRANK10,
+    HKRANK11,
+    HKRANK12,
+    HKRANK13,
+    HKRANK14,
+    HKRANKMAX
 };
 
 /// Type of server, this is values from second column of Cfg_Configs.dbc (1.12.1 have another numeration)
@@ -525,6 +546,8 @@ class World
         void SendServerMessage(ServerMessageType type, const char* text = "", Player* player = NULL);
         void SendZoneUnderAttackMessage(uint32 zoneId, Team team);
         void SendDefenseMessage(uint32 zoneId, int32 textId);
+
+        uint32 pvp_ranks[HKRANKMAX];
 
         /// Are we in the middle of a shutdown?
         bool IsShutdowning() const { return m_ShutdownTimer > 0; }
