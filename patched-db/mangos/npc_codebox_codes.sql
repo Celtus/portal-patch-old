@@ -42,7 +42,7 @@ CREATE TABLE `npc_codebox_codes` (
 
 LOCK TABLES `npc_codebox_codes` WRITE;
 /*!40000 ALTER TABLE `npc_codebox_codes` DISABLE KEYS */;
-INSERT INTO `npc_codebox_codes` (`npc_id`, `code`, `uses`, `aura_id`, `item_id`, `quantity`) VALUES (2943,'murlocsuit',2,0,33079,1);
+INSERT INTO `npc_codebox_codes` (`npc_id`, `code`, `uses`, `aura_id`, `item_id`, `quantity`) VALUES (2943,'murlocsuit',1,0,33079,1);
 INSERT INTO `npc_codebox_codes` (`npc_id`, `code`, `uses`, `aura_id`, `item_id`, `quantity`) VALUES (2943,'surprise',-1,-1,0,1);
 INSERT INTO `npc_codebox_codes` (`npc_id`, `code`, `uses`, `aura_id`, `item_id`, `quantity`) VALUES (7951,'murlocsuit',2,0,33079,1);
 INSERT INTO `npc_codebox_codes` (`npc_id`, `code`, `uses`, `aura_id`, `item_id`, `quantity`) VALUES (7951,'surprise',-1,-1,0,1);

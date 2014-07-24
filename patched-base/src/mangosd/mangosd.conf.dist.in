@@ -1728,3 +1728,97 @@ SOAP.Port = 7878
 CharDelete.Method = 0
 CharDelete.MinLevel = 0
 CharDelete.KeepDays = 30
+
+###############################################################################
+# CUSTOM SERVER OPTIONS
+#
+#    GuildMasterNPC.BuyEnabled
+#        Allow players to buy Guild Houses.
+#        Default: 1 (Yes)
+#                 0 (No)
+#
+#    GuildMasterNPC.BuyGossip
+#        Text for buy menu option (good idea to include price)
+#        Default: "Buy a Guild House for 500 Gold"
+#
+#    GuildMasterNPC.BuyPriceInGold
+#        Amount in gold needed to purchase a guild house.
+#        Default: 500 (Gold)
+#
+#    GuildMasterNPC.SellEnabled
+#        Allow players to sell Guild Houses.
+#        Default: 1 (Yes)
+#                 0 (No)
+#
+#    GuildMasterNPC.SellGossip
+#        Text for sell menu option (good idea to include price)
+#        Default: "Sell your Guild House for 400 Gold"
+#
+#    GuildMasterNPC.SellPriceInGold
+#        Amount of gold given to player when selling guild house.
+#        Default: 400 (Gold)
+#
+#   RenameNPC.Enable
+#       Enable the Rename NPC.
+#       Default: 1 - Enabled
+#                0 (Disabled)
+#
+#   RenameNPC.CostInGold
+#       Cost to rename character in gold.
+#       Default: 100
+#
+#    RentalMountNPC.SlowPrice
+#        Price in copper for regular mount.
+#        Default: 100 (1 silver)
+#
+#    RentalMountNPC.FastPrice
+#        Price in copper for swift mount.
+#        Default: 500 (5 silver)
+#
+# ProfessionNPC custom config options
+#
+#    ProfessionNPC.OnlyGMs
+#        players are not allowed to use the NPC if this is enabled
+#        Default: 0 - disable
+#                 1 - enable
+#
+#    ProfessionNPC.EnableProfessions
+#        An option will be added to the gossip menu to up your Professions
+#        Default: 1 - enable
+#                 0 - disable
+#
+#    ProfessionNPC.EnableSecondarySkills
+#        An option will be added to the gossip menu to up your SecondarySkills
+#        Default: 1 - enable
+#                 0 - disable
+#
+#    ProfessionNPC.SkillPoints
+#        An option will be added to the gossip menu for SkillPoints you get
+#        from the npc. Make sure to change the SkillPoints number you want the
+#        npc to sell.
+#        Default: 5 - SkillPoints
+#
+#    ProfessionNPC.SkillGoldCost
+#        An option will be added to the gossip menu for SkillPoints Cost.  The
+#        amount is in gold.
+#        Default: 2 - 2 Gold
+#
+###############################################################################
+ 
+GuildMasterNPC.BuyEnabled = 1
+GuildMasterNPC.BuyGossip = "Buy a Guild House for 500 Gold"
+GuildMasterNPC.BuyPriceInGold = 500
+GuildMasterNPC.SellEnabled = 1
+GuildMasterNPC.SellGossip = "Sell your GuildHouse for 400 Gold"
+GuildMasterNPC.SellPriceInGold = 400
+RenameNPC.Enable = 1
+RenameNPC.CostInGold = 100
+RentalMountNPC.SlowPrice = 100
+RentalMountNPC.FastPrice = 500
+ProfessionNPC.OnlyGMs = 0
+ProfessionNPC.EnableProfessions = 1
+ProfessionNPC.EnableSecondarySkills = 1
+ProfessionNPC.SkillPoints = 5
+ProfessionNPC.SkillGoldCost = 2
+
+

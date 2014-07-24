@@ -62,6 +62,7 @@ gameobject_teleports
 gameobject_template               
 gossip_menu                       
 gossip_menu_option                
+guild_houses                      
 instance_encounters               
 instance_template                 
 item_convert                      
@@ -69,6 +70,8 @@ item_enchantment_template
 item_expire_convert               
 item_loot_template                
 item_required_target              
+item_summonnpc                    
+item_teleports                    
 item_template                     
 locales_achievement_reward        
 locales_creature                  
@@ -83,10 +86,12 @@ mail_level_reward
 mail_loot_template                
 mangos_string                     
 milling_loot_template             
+npc_areaguard                     
 npc_codebox_aura_loot             
 npc_codebox_codes                 
 npc_codebox_item_loot             
 npc_codebox_text                  
+npc_doorcodes                     
 npc_gossip                        
 npc_spellclick_spells             
 npc_teleport_association          
