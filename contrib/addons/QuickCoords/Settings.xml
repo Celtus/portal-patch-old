@@ -1,0 +1,367 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\..\FrameXML\UI.xsd">
+	<!-- Settings Frame -->
+	<Frame name="QuickCoords_SettingsFrame" inherits="QuickCoords_MovableFrame" frameStrata="HIGH" hidden="true">
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border">
+			<EdgeSize>
+				<AbsValue val="18"/>
+			</EdgeSize>
+		<BackgroundInsets>
+			<AbsInset left="4" right="4" top="4" bottom="4"/>
+			</BackgroundInsets>
+		</Backdrop>
+		<Size x="300" y="250"/>
+		<Anchors>
+			<Anchor point="CENTER" relativeTo="UIParent"/>
+		</Anchors>
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture file="Interface\DialogFrame\UI-DialogBox-Header">
+					<Size x="250" y="50"/>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset y="12"/>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<FontString inherits="GameFontNormal" text="QuickCoords">
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset y="3"/>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentVersion" inherits="GameFontNormalSmall" text="Version: n/a">
+					<Color r="0.8" g="0.8" b="0.8"/>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset x="10" y="-10"/>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString inherits="GameFontNormalSmall" text="Settings">
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset y="-20"/>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnShow>
+				if (QuickCoords["version"]) then
+					getglobal(this:GetName().."Version"):SetText("Version: "..QuickCoords["version"]);
+				end
+			</OnShow>
+		</Scripts>
+		<Frames>
+			<Button name="$parentDoneButton" inherits="OptionsButtonTemplate" text="Done">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset x="-10" y="10"/>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						this:GetParent():Hide();
+						this:GetParent():SetUserPlaced(false);
+						PlaySound("igMainMenuQuit");
+					</OnClick>
+				</Scripts>
+			</Button>
+		<!-- Options -->
+		<CheckButton name="$parentCheckEnable" inherits="OptionsCheckButtonTemplate"> <!-- Enable Button -->
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset x="-50" y="-13"/>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						getglobal(this:GetName().."Text"):SetText("Enable");
+						this.tooltipText = "Enable/Disable all AddOn features (Also toggle this to clamp coords back to portrait if unreachable)";
+					</OnLoad>
+					<OnShow>
+						this:SetChecked(QuickCoords["on"]);
+					</OnShow>
+					<OnClick>
+						PlaySound("igMainMenuOptionCheckBoxOn");
+						QuickCoords["on"] = this:GetChecked();
+						QuickCoords["clamp"] = true;
+						QC_SetFramesVisible();
+					</OnClick>
+					<OnUpdate>
+						for i=1, 4 do
+							this.check = getglobal(this:GetParent():GetName().."Check"..i);
+							if ( this:GetChecked() and this.check:IsEnabled() == 0 ) then
+								this.check:Enable();
+								getglobal(this:GetParent():GetName().."Check"..i.."Text"):SetFontObject("GameFontNormalSmall")
+							elseif ( (not this:GetChecked()) and this.check:IsEnabled() == 1 ) then
+								this.check:Disable();
+								getglobal(this:GetParent():GetName().."Check"..i.."Text"):SetFontObject("GameFontDisableSmall");
+							end
+						end
+						if ( this:GetChecked() ) then
+							getglobal(this:GetParent():GetName().."SkinChooserButton"):Enable();
+						elseif ( not this:GetChecked() ) then
+							getglobal(this:GetParent():GetName().."SkinChooserButton"):Disable();
+						end
+						this.check = nil;
+					</OnUpdate>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="$parentCheck1" inherits="OptionsCheckButtonTemplate"> <!-- Main  Coords -->
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="15" y="-30"/>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnShow>
+						this:SetChecked(QuickCoords["player"]);
+					</OnShow>
+					<OnClick>
+						PlaySound("igMainMenuOptionCheckBoxOn");
+						QuickCoords["player"] = this:GetChecked();
+						QC_SetFramesVisible();
+					</OnClick>
+					<OnLoad>
+						getglobal(this:GetName().."Text"):SetText("Show main coords frame");
+						this.tooltipText = "Show your character's coordinates";
+					</OnLoad>
+					<OnUpdate>
+						if ( this:GetChecked() and this:IsEnabled() == 1 ) then
+							getglobal(this:GetParent():GetName().."Check1a"):Enable();
+							getglobal(this:GetParent():GetName().."Check1aText"):SetFontObject("GameFontNormalSmall");
+						else
+							getglobal(this:GetParent():GetName().."Check1a"):Disable();
+							getglobal(this:GetParent():GetName().."Check1aText"):SetFontObject("GameFontDisableSmall");
+						end
+					</OnUpdate>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="$parentCheck1a" inherits="OptionsCheckButtonTemplate"> <!-- Main Coords "n/a" hide option -->
+				<Size x="25" y="25"/>
+				<Anchors>
+					<Anchors point="BOTTOMRIGHT" relativeTo="$parentCheck1">
+						<Offset y="-18"/>
+					</Anchors>
+				</Anchors>
+				<Scripts>
+					<OnShow>
+						this:SetChecked(QuickCoords["hideUnknownMain"]);
+					</OnShow>
+					<OnClick>
+						PlaySound("igMainMenuOptionCheckBoxOn");
+						QuickCoords["hideUnknownMain"] = this:GetChecked();
+						QC_SetFramesVisible();
+					</OnClick>
+					<OnLoad>
+						getglobal(this:GetName().."Text"):SetText('Hide when "n/a"');
+						this.tooltipText = "Hide when coordinates aren't valid (such as in an instance)";
+					</OnLoad>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="$parentCheck2" inherits="OptionsCheckButtonTemplate"> <!-- Party Coords -->
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeTo="$parentCheck1a">
+						<Offset x="-7" y="-25"/>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnShow>
+						this:SetChecked(QuickCoords["party"]);
+					</OnShow>
+					<OnClick>
+						PlaySound("igMainMenuOptionCheckBoxOn");
+						QuickCoords["party"] = this:GetChecked();
+						QC_SetFramesVisible();
+					</OnClick>
+					<OnLoad>
+						getglobal(this:GetName().."Text"):SetText("Show party members' coordinates");
+						this.tooltipText = "Shows each party member's coordinates in a small frame above their portrait";
+					</OnLoad>
+					<OnUpdate>
+						if ( this:GetChecked() and this:IsEnabled() == 1 ) then
+							getglobal(this:GetParent():GetName().."Check2a"):Enable();
+							getglobal(this:GetParent():GetName().."Check2aText"):SetFontObject("GameFontNormalSmall");
+							getglobal(this:GetParent():GetName().."Check2b"):Enable();
+							getglobal(this:GetParent():GetName().."Check2bText"):SetFontObject("GameFontNormalSmall");
+						else
+							getglobal(this:GetParent():GetName().."Check2a"):Disable();
+							getglobal(this:GetParent():GetName().."Check2aText"):SetFontObject("GameFontDisableSmall");
+							getglobal(this:GetParent():GetName().."Check2b"):Disable();
+							getglobal(this:GetParent():GetName().."Check2bText"):SetFontObject("GameFontDisableSmall");
+						end
+					</OnUpdate>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="$parentCheck2a" inherits="OptionsCheckButtonTemplate"> <!-- Party-out-of-zone option -->
+				<Size x="25" y="25"/>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parentCheck2">
+						<Offset y="-18"/>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnShow>
+						this:SetChecked(QuickCoords["showOutOfZone"]);
+					</OnShow>
+					<OnClick>
+						PlaySound("igMainMenuOptionCheckBoxOn");
+						QuickCoords["showOutOfZone"] = this:GetChecked();
+						QC_SetFramesVisible();
+					</OnClick>
+					<OnLoad>
+						getglobal(this:GetName().."Text"):SetText("Show out-of-zone coordinates");
+						this.tooltipText = "When a party member is not on your map, show the coordinates of the map they're currently in (in grey)";
+					</OnLoad>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="$parentCheck2b" inherits="OptionsCheckButtonTemplate"> <!-- Hide "n/a" party coords -->
+				<Size x="25" y="25"/>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeTo="$parentCheck2a">
+						<Offset y="-18"/>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnShow>
+						this:SetChecked(QuickCoords["hideUnknownParty"]);
+					</OnShow>
+					<OnClick>
+						PlaySound("igMainMenuOptionCheckBoxOn");
+						QuickCoords["hideUnknownParty"] = this:GetChecked();
+						QC_SetFramesVisible();
+					</OnClick>
+					<OnLoad>
+						getglobal(this:GetName().."Text"):SetText('Hide when "n/a"');
+						this.tooltipText = "Hide when coordinates aren't valid (such as in an instance)";
+					</OnLoad>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="$parentCheck3" inherits="OptionsCheckButtonTemplate"> <!-- Map-Cursor coords -->
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeTo="$parentCheck2b">
+						<Offset x="-7" y="-25"/>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnShow>
+						this:SetChecked(QuickCoords["map"]);
+					</OnShow>
+					<OnClick>
+						PlaySound("igMainMenuOptionCheckBoxOn");
+						QuickCoords["map"] = this:GetChecked();
+						QC_SetFramesVisible();
+					</OnClick>
+					<OnLoad>
+						getglobal(this:GetName().."Text"):SetText("Show map/cursor coordinates");
+						this.tooltipText = "Display your cursor coordinates while in the world map";
+					</OnLoad>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="$parentCheck4" inherits="OptionsCheckButtonTemplate"> <!-- Map Key -->
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativeTo="$parentCheck3">
+						<Offset y="-25"/>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnShow>
+						this:SetChecked(QuickCoords["mapClick"]);
+					</OnShow>
+					<OnClick>
+						PlaySound("igMainMenuOptionCheckBoxOn");
+						if (this:GetChecked()) then
+							getglobal(this:GetParent():GetName().."MapKey"):SetAutoFocus(true);
+							getglobal(this:GetParent():GetName().."MapKey"):HighlightText();
+						end
+						QuickCoords["mapClick"] = this:GetChecked();
+						QC_SetFramesVisible();
+					</OnClick>
+					<OnLoad>
+						getglobal(this:GetName().."Text"):SetText("Copy map-cursor coords key:");
+						this.tooltipText = "Press this key while in the world map to copy your cursor's coordinates to a small frame beneath your main coordinates (Double click the frame to remove it)";
+					</OnLoad>
+					<OnUpdate>
+						if ( this:GetChecked() and this:IsEnabled() == 1 ) then
+							getglobal(this:GetParent():GetName().."MapKey"):Show();
+						else
+							getglobal(this:GetParent():GetName().."MapKey"):Hide();
+						end
+					</OnUpdate>
+				</Scripts>
+			</CheckButton>
+			<EditBox name="$parentMapKey" letters="1" inherits="InputBoxTemplate" autoFocus="false">
+				<Size x="16" y="25"/>
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="$parentCheck4">
+						<Offset x="180"/>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnUpdate>
+						if (this:GetNumLetters() == 0 or this:GetText() == " ") then
+							this:SetText(QuickCoords["mapClickKey"]);
+							this.reset = true;
+						end
+					</OnUpdate>
+					<OnEscapePressed>
+						this:SetAutoFocus(false);
+						this:ClearFocus();
+					</OnEscapePressed>
+					<OnHide>
+						this:SetAutoFocus(false);
+					</OnHide>
+					<OnTextChanged>
+						this:SetText(strupper(this:GetText()));
+						if (not this.reset) then
+							this:HighlightText();
+						else
+							this.reset = nil;
+						end
+						QuickCoords["mapClickKey"] = this:GetText();
+					</OnTextChanged>
+				</Scripts>
+				<FontString inherits="GameFontNormal">
+					<Color r="0.8" g="0.8" b="0.8"/>
+				</FontString>
+			</EditBox>
+			<Frame name="$parentSkinChooser" inherits="UIDropDownMenuTemplate">
+				<Anchors>
+					<Anchor point="BOTTOMLEFT">
+						<Offset x="7" y="7"/>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="ARTWORK">
+						<FontString name="$parentTitle" inherits="GameFontNormalSmall" text="Select Frame Style:">
+							<Anchors>
+								<Anchor point="TOP">
+									<Offset y="10"/>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnLoad>
+						UIDropDownMenu_SetWidth(95, this);
+					</OnLoad>
+					<OnShow>
+						UIDropDownMenu_Initialize(this, function() QC_RightClickInit("skin") end);
+					</OnShow>
+					<OnUpdate>
+						if (QuickCoords["skin"] == 1) then
+							UIDropDownMenu_SetText("WoW-Dialog", this);
+						elseif (QuickCoords["skin"] == 2) then
+							UIDropDownMenu_SetText("Simple", this);
+						end
+					</OnUpdate>
+				</Scripts>
+			</Frame>
+		</Frames>
+	</Frame>
+</Ui>

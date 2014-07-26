@@ -1,0 +1,5 @@
+## Interface: 30000
+## Title: NetPerf
+## Notes: Show latency and FPS information
+## Author: Celtus (celtus614@gmail.com)
+NetPerf.xml

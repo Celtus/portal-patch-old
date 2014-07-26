@@ -1,0 +1,6 @@
+## Interface: 30000
+## Title: GMTools
+## Author: Celtus
+## Notes: MaNGOS GameMaster Tools
+## Email: celtus614@gmail.com
+GMTools.xml

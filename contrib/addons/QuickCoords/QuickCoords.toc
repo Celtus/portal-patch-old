@@ -1,0 +1,7 @@
+## Interface: 30000
+## Title: QuickCoords
+## Author: Nen/Chris nenkasai@gmail.com
+## Version: 2.21
+## Notes: Shows coords for player, map, and party. Right-click coords frame or type "/quickcoords" for options.
+## SavedVariablesPerCharacter: QuickCoords
+QuickCoords.xml

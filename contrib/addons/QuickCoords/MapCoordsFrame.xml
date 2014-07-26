@@ -1,0 +1,49 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\..\FrameXML\UI.xsd">
+	<!-- Map Coords -->
+	<Button name="QuickCoords_MapText" inherits="QuickCoords_MovableFrame" frameStrata="TOOLTIP"
+					topLevel="true" parent="WorldMapFrame">
+		<Size x="200" y="50"/>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border">
+			<EdgeSize>
+				<AbsValue val="18"/>
+			</EdgeSize>
+			<BackgroundInsets>
+				<AbsInset left="4" right="4" top="4" bottom="4"/>
+			</BackgroundInsets>
+		</Backdrop>
+		<Anchors>
+			<Anchor point="BOTTOMLEFT" relativeTo="WorldMapFrame">
+				<Offset x="10" y="10"/>
+			</Anchor>
+		</Anchors>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString name="$parentPlayer" inherits="GameFontNormal" font="Fonts\FRIZQT__.TTF" text="Player Coordinates: n/a">
+					<FontHeight> <AbsValue val="12"/> </FontHeight>
+					<Anchors>
+						<Anchor point="TOP"> <Offset y="-10"/> </Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentCursor" inherits="GameFontNormal" font="Fonts\FRIZQT__.TTF" text="Cursor Coordinates: n/a">
+					<FontHeight> <AbsValue val="12"/> </FontHeight>
+					<Anchors>
+						<Anchor point="BOTTOM"> <Offset y="12"/> </Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnUpdate>
+				local coords = QC_GetPlayerCoords("player");
+				if (coords) then
+					getglobal(this:GetName().."Player"):SetText("Player Coordinates: "..coords);
+				end
+				getglobal(this:GetName().."Cursor"):SetText("Cursor Coordinates: "..QC_GetCursorCoords());
+			</OnUpdate>
+			<OnHide>
+				this:SetUserPlaced(false);
+			</OnHide>
+		</Scripts>
+	</Button>
+</Ui>

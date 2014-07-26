@@ -32,7 +32,19 @@ if [ $BCORES = "1" ]; then
 else
   MAKECMD="make -j${BCORES}"
 fi
-/bin/echo -ne "\n"
+
+/bin/echo -ne "\nInstall when build completed (Y/n)? "
+read INSTBUILD
+if [ ! $INSTBUILD ]; then
+  INSTBUILD="Y"
+else
+  INSTBUILD=`echo $REBUILD | tr '[:lower:]' '[:upper:]'`
+fi
+if [ $INSTBUILD = "Y" ]; then
+  MAKECMD=`echo $MAKECMD install`
+else
+  INSTBUILD="N"
+fi
 
 if [ ! -d build ]; then
   mkdir build
@@ -58,20 +70,6 @@ else
     $CMAKECMD
   fi 
 fi 
-
-echo ""
-/bin/echo -ne "Install when build completed (Y/n)? "
-read INSTBUILD
-if [ ! $INSTBUILD ]; then
-  INSTBUILD="Y"
-else
-  INSTBUILD=`echo $REBUILD | tr '[:lower:]' '[:upper:]'`
-fi
-if [ $INSTBUILD = "Y" ]; then
-  MAKECMD=`echo $MAKECMD install`
-else
-  INSTBUILD="N"
-fi
 
 $MAKECMD
 

@@ -1,0 +1,29 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\..\FrameXML\UI.xsd">
+	<Script file="QuickCoords.lua"></Script>
+	<Include file="Templates.xml"/>
+	<Include file="Settings.xml"/>
+	<Include file="PlayerCoordsFrame.xml"/>
+	<Include file="MapCoordsFrame.xml"/>
+	<Include file="PartyCoordsFrame.xml"/>
+	<Frame parent="UIParent">
+		<Scripts>
+			<OnLoad>
+				this:RegisterEvent("ADDON_LOADED");
+				this:RegisterEvent("ZONE_CHANGED");
+				this:RegisterEvent("ZONE_CHANGED_INDOORS");
+				this:RegisterEvent("ZONE_CHANGED_NEW_AREA");
+				--
+				QC_HookedFunc();
+			</OnLoad>
+			<OnEvent>
+				QC_OnEvent();
+			</OnEvent>
+			<OnUpdate>
+				if (QuickCoords["on"]) then
+					QC_UpdateCoords(elapsed);
+				end
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+</Ui>

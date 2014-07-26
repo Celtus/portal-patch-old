@@ -1,0 +1,80 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\..\FrameXML\UI.xsd">
+	<!-- Player Coords -->
+	<Button name="QuickCoords_PlayerFrame" inherits="QuickCoords_MovableFrame" movable="false">
+		<Anchors>
+			<Anchor point="BOTTOMLEFT" relativeTo="PlayerFrameHealthBar">
+				<Offset y="-37"/>
+			</Anchor>
+		</Anchors>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parentCoords" inherits="GameFontNormal" text="n/a">
+					<Anchors>
+						<Anchor point="CENTER">
+							<Offset x="-0.2" y="0.5"/>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame name="$parentRightMenu" inherits="UIDropDownMenuTemplate" hidden="true"/>
+			<Button name="$parentMapClick" movable="false" frameStrata="LOW" alpha="0.8" hidden="true">
+				<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border">
+					<TileSize>
+						<AbsValue val="63"/>
+					</TileSize>
+					<EdgeSize>
+						<AbsValue val="8"/>
+					</EdgeSize>
+					<BackgroundInsets>
+						<AbsInset left="2" right="2" top="2" bottom="2"/>
+					</BackgroundInsets>
+				</Backdrop>
+				<Size x="43" y="17"/>
+				<Anchors>
+					<Anchor point="CENTER">
+						<Offset y="-15"/>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer level="ARTWORK">
+						<FontString name="$parentCoords" inherits="MasterFont" font="Fonts\ARIALN.TTF" justifyH="CENTER" text="n/a">
+							<FontHeight val="11"/>
+							<Color r="1" g="1" b="1"/>
+							<Anchors>
+								<Anchor point="BOTTOM">
+									<Offset x="-0.2" y="3"/>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnLoad>
+						this:SetBackdropBorderColor(0.6, 0.6, 0.6);
+					</OnLoad>
+					<OnShow>
+						getglobal(this:GetName().."Coords"):SetText(QuickCoords["mapClickCoords"]);
+					</OnShow>
+					<OnDoubleClick>
+						this:Hide();
+						QuickCoords["mapClickCoords"] = nil;
+					</OnDoubleClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				this:RegisterForClicks("RightButtonUp");
+			</OnLoad>
+			<OnClick>
+				local frame = getglobal(this:GetName().."RightMenu");
+				UIDropDownMenu_Initialize(frame, function() QC_RightClickInit("player") end, "MENU");
+				ToggleDropDownMenu(1, nil, frame, this, 0, 0);
+				PlaySound("igMainMenuOptionCheckBoxOn");
+			</OnClick>
+		</Scripts>
+	</Button>
+</Ui>

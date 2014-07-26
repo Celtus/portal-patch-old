@@ -1,0 +1,13 @@
+<Ui>
+	<Script file="NetPerf.lua"/>
+	<Frame name="NetPerfFrame">
+		<Scripts>
+			<OnLoad>
+				NetPerf_OnLoad();
+			</OnLoad>
+			<OnUpdate>
+				NetPerf_OnUpdate();
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+</Ui>

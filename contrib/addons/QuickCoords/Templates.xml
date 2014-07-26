@@ -1,0 +1,54 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\..\FrameXML\UI.xsd">
+	<!-- Player Coords Templates -->
+	<Button name="QuickCoords_MovableFrame" virtual="true" enableMouse="true" movable="true"
+					clampedToScreen="true" hidden="true" frameStrata="MEDIUM" parent="UIParent">
+		<Scripts>
+			<OnMouseDown>
+				if ( (not this.isMoving and arg1 == "LeftButton") and this:IsMovable() ) then
+					this:StartMoving();
+					this.isMoving = true;
+				end
+			</OnMouseDown>
+			<OnMouseUp>
+				if (this.isMoving) then
+					this:StopMovingOrSizing();
+					this.isMoving = nil;
+				end
+			</OnMouseUp>
+			<OnHide>
+				if (this.isMoving) then
+					this:StopMovingOrSizing();
+					this.isMoving = nil;
+				end
+			</OnHide>
+		</Scripts>
+	</Button>
+	
+	<!-- Party Coords Template -->
+	<Frame name="QuickCoords_PartyTemp" parent="UIParent" alpha="0.7" hidden="true" frameStrata="LOW" virtual="true">
+		<Size x="50" y="15"/>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border">
+			<TileSize>
+				<AbsValue val="63"/>
+			</TileSize>
+			<EdgeSize>
+				<AbsValue val="10"/>
+			</EdgeSize>
+			<BackgroundInsets>
+				<AbsInset left="2" right="2" top="2" bottom="2"/>
+			</BackgroundInsets>
+		</Backdrop>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parentCoords" inherits="GameFontNormalSmall" text="n/a">
+					<Anchors>
+						<Anchor point="CENTER">
+							<Offset x="-1"/>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Frame>
+</Ui>

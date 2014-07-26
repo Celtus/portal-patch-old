@@ -1,0 +1,6 @@
+## Interface: 30000
+## Title: Display IDs Fixer
+## Version: 0.1.2
+## Notes: Display IDs Fixer
+## Author: Ethos
+DIF.xml

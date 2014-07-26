@@ -1,0 +1,59 @@
+<!-- GMTools -->
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">
+	<Script file="GMTools.lua"/>
+	
+	<Button name="GMToolsFloatingButton" text="GM" inherits="OptionsButtonTemplate" parent="UIParent" toplevel="false" movable="true" frameStrata="MEDIUM" hidden="false" enableMouse="true">
+		<Size>
+			<AbsDimension x="64" y="32"/>
+		</Size>
+		<Anchors>
+			<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPLEFT">
+				<Offset>
+					<AbsDimension x="65" y="-105"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		
+		<NormalTexture file="Interface\AddOns\GMTools\Images\GMToolsButtonEmptyUp.tga"/>
+		<PushedTexture file="Interface\AddOns\GMTools\Images\GMToolsButtonEmptyDown.tga"/>
+		<HighlightTexture alphaMode="ADD" file="Interface\Minimap\UI-Minimap-ZoomButton-Highlight"/>
+		<NormalFont inherits="GameFontNormalLarge" wraponspaces="false" justifyH="CENTER" />
+		
+		<Scripts>
+			<OnLoad>
+				GMToolsOnLoad();
+			</OnLoad>
+			<OnClick>
+				GMToolsOnClick(self);
+			</OnClick>
+			<OnMouseUp>
+-- 				if ( this.isMoving ) then
+ 					this:StopMovingOrSizing();
+ 					this.isMoving = false;
+-- 				end
+			</OnMouseUp>
+			<OnMouseDown>
+-- 				if ( ( ( not this.isLocked ) or ( this.isLocked == 0 ) ) and ( arg1 == "LeftButton" ) and ( IsShiftKeyDown() ) ) then
+ 					this:StartMoving();
+ 					this.isMoving = true;
+-- 				end
+			</OnMouseDown>
+ 			<OnHide>
+-- 				 if ( this.isMoving ) then
+ 					this:StopMovingOrSizing();
+ 					this.isMoving = false;
+-- 				 end
+ 			</OnHide>
+		</Scripts>
+		<Frames>
+			<Frame name="GMToolsDropDownMenu" inherits="UIDropDownMenuTemplate" id="1" frameStrata="DIALOG_FULLSCREEN">
+				<Scripts>
+					<OnLoad>
+						UIDropDownMenu_Initialize(self, GMToolsDropDownMenuInitialize, "MENU");
+					</OnLoad>
+				</Scripts>
+			</Frame>
+		</Frames>
+	</Button>
+	
+</Ui>

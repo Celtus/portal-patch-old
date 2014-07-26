@@ -1,0 +1,35 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\..\FrameXML\UI.xsd">
+	<!-- Party1 -->
+	<Frame name="QuickCoords_Party1" inherits="QuickCoords_PartyTemp" parent="PartyMemberFrame1">
+		<Anchors>
+			<Anchor point="TOPLEFT" relativeTo="PartyMemberFrame1">
+				<Offset y="10"/>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<!-- Party2 -->
+	<Frame name="QuickCoords_Party2" inherits="QuickCoords_PartyTemp" parent="PartyMemberFrame2">
+		<Anchors>
+			<Anchor point="TOPLEFT" relativeTo="PartyMemberFrame2">
+				<Offset y="10"/>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<!-- Party3 -->
+	<Frame name="QuickCoords_Party3" inherits="QuickCoords_PartyTemp" parent="PartyMemberFrame3">
+		<Anchors>
+			<Anchor point="TOPLEFT" relativeTo="PartyMemberFrame3">
+				<Offset y="10"/>
+			</Anchor>
+		</Anchors>
+	</Frame>
+	<!-- Party4 -->
+	<Frame name="QuickCoords_Party4" inherits="QuickCoords_PartyTemp" parent="PartyMemberFrame4">
+		<Anchors>
+			<Anchor point="TOPLEFT" relativeTo="PartyMemberFrame4">
+				<Offset y="10"/>
+			</Anchor>
+		</Anchors>
+	</Frame>
+</Ui>

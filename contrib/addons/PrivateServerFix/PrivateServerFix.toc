@@ -1,0 +1,5 @@
+## Interface: 30000
+## Title: PrivateServerFix
+## Author: BitByte
+## Notes: Client side fix for Private Server issues
+PrivateServerFix.lua
