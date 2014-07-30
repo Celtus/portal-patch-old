@@ -7,6 +7,7 @@ battleground_events
 battleground_template             
 battlemaster_entry                
 command                           
+command_external                  
 conditions                        
 creature                          
 creature_addon                    

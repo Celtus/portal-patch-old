@@ -7184,3 +7184,47 @@ bool ChatHandler::HandleMmapTestArea(char* args)
 
     return true;
 }
+
+bool ChatHandler::HandleSystemCommand(char* args)
+{
+
+    if (!*args)
+        return false;
+
+    char* cmdname  = strtok((char*)args, " ");
+
+    QueryResult *result = WorldDatabase.PQuery("SELECT command_exec FROM command_external WHERE command_name = '%s'", cmdname);
+
+    if (!result)
+    {
+        SendSysMessage("System Command failed to execute.");
+        return true;
+    }
+
+    Field *fields = result->Fetch();
+    std::string syscommand = fields[0].GetCppString();
+
+    char *sysexec = (char*)syscommand.c_str();
+
+    PSendSysMessage("Executing command: %s",syscommand.c_str());
+
+    FILE *fpipe;
+    char line[256];
+
+    if ( !(fpipe = (FILE*)popen(sysexec,"r")) )
+    {  
+        SendSysMessage("System Command failed to execute.");
+        return true;
+    }
+
+    while ( fgets( line, sizeof line, fpipe))
+    {
+        PSendSysMessage("  %s", line);
+    }
+    pclose(fpipe);
+
+    delete result;
+
+    return true;
+}
+
