@@ -1490,7 +1490,7 @@ void ObjectMgr::LoadCreatures()
             AddCreatureToGrid(guid, &data);
 
             if (cInfo->ExtraFlags & CREATURE_FLAG_EXTRA_ACTIVE)
-                m_activeCreatures.insert(data.mapid, guid);
+                m_activeCreatures.insert(ActiveCreatureGuidsOnMap::value_type(data.mapid, guid));
         }
 
         ++count;
@@ -9165,7 +9165,7 @@ void ObjectMgr::LoadVendorTemplates()
 void ObjectMgr::LoadActiveEntities(Map* _map)
 {
     // Check - if _map is provided, it is expected that this is no continent
-    if (_map && sMapStore.LookupEntry<MapEntry>(_map->GetId())->IsContinent())
+    if (_map && _map->IsContinent())
         return;
 
     // Collect Maps that should be processed
@@ -9174,7 +9174,7 @@ void ObjectMgr::LoadActiveEntities(Map* _map)
         processMaps.push_back(_map);
     else                                                    // Continent case
     {
-        const uint32[4] continents = {0, 1, 530, 571};
+        uint32 continents[] = {0, 1, 530, 571};
         for (int i = 0; i < countof(continents); ++i)
         {
             _map = sMapMgr.FindMap(continents[i]);
@@ -9188,16 +9188,16 @@ void ObjectMgr::LoadActiveEntities(Map* _map)
     }
 
     // Load active objects for this map
-    for (int i = 0; i < processMaps.size(); ++i)
+    for (uint32 i = 0; i < processMaps.size(); ++i)
     {
         Map* m = processMaps[i];
 
-        if (sConfig.getConfig(CONFIG_BOOL_GRID_FORCE_LOAD_ALL_CREATURE))
+        if (sWorld.getConfig(CONFIG_BOOL_GRID_FORCE_LOAD_ALL_CREATURES))
         {
             for (CreatureDataMap::const_iterator itr = mCreatureDataMap.begin(); itr != mCreatureDataMap.end(); ++itr)
             {
                 if (itr->second.mapid == m->GetId())
-                    m->ForceLoadGrid(itr->second.posX, itr->second.posY
+                    m->ForceLoadGrid(itr->second.posX, itr->second.posY);
             }
         }
         else                                                // Normal case - Load all npcs that are active
@@ -9205,8 +9205,8 @@ void ObjectMgr::LoadActiveEntities(Map* _map)
             std::pair<ActiveCreatureGuidsOnMap::const_iterator, ActiveCreatureGuidsOnMap::const_iterator> bounds = m_activeCreatures.equal_range(m->GetId());
             for (ActiveCreatureGuidsOnMap::const_iterator itr = bounds.first; itr != bounds.second; ++itr)
             {
-                if (CreatureData const* data = mCreatureDataMap[itr->second])
-                    m->ForceLoadGrid(data->posX, data->posY);
+                CreatureData const& data = mCreatureDataMap[itr->second];
+                m->ForceLoadGrid(data.posX, data.posY);
             }
         }
 

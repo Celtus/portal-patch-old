@@ -137,7 +137,7 @@ struct MangosStringLocale
     uint32 Emote;
 };
 
-typedef UNORDERED_MAP<uint32, CreatureData> CreatureDataMap;
+typedef UNORDERED_MAP<uint32 /*guid*/, CreatureData> CreatureDataMap;
 typedef CreatureDataMap::value_type CreatureDataPair;
 
 class FindCreatureData
