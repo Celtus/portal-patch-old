@@ -29,7 +29,7 @@ CREATE TABLE `db_version` (
   `version` varchar(120) DEFAULT NULL,
   `creature_ai_version` varchar(120) DEFAULT NULL,
   `cache_id` int(10) DEFAULT '0',
-  `required_12654_01_mangos_creature_template_power` bit(1) DEFAULT NULL
+  `required_12670_01_mangos_spell_template` bit(1) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='Used DB version notes';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -39,7 +39,7 @@ CREATE TABLE `db_version` (
 
 LOCK TABLES `db_version` WRITE;
 /*!40000 ALTER TABLE `db_version` DISABLE KEYS */;
-INSERT INTO `db_version` (`version`, `creature_ai_version`, `cache_id`, `required_12654_01_mangos_creature_template_power`) VALUES ('UDB 0.12.2 (406) for CMaNGOS 12444 with SD2 SQL for rev. 2857','ACID 3.2.0 \'Let The Show Carry On!\' - Full Release for CMaNGOS-WOTLK (3.3.5a Client)',406,NULL);
+INSERT INTO `db_version` (`version`, `creature_ai_version`, `cache_id`, `required_12670_01_mangos_spell_template`) VALUES ('UDB 0.12.2 (406) for CMaNGOS 12444 with SD2 SQL for rev. 2857','ACID 3.2.0 \'Let The Show Carry On!\' - Full Release for CMaNGOS-WOTLK (3.3.5a Client)',406,NULL);
 /*!40000 ALTER TABLE `db_version` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
