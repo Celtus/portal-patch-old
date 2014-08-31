@@ -757,6 +757,9 @@ class ObjectMgr
         void LoadTrainerTemplates();
         void LoadTrainers() { LoadTrainers("npc_trainer", false); }
 
+        /// @param _map Map* of the map for which to load active entities. If NULL active entities on continents are loaded
+        void LoadActiveEntities(Map* _map);
+
         void LoadVehicleAccessory();
 
         std::string GeneratePetName(uint32 entry);
