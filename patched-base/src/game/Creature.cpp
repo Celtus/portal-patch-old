@@ -176,7 +176,7 @@ void Creature::AddToWorld()
     Unit::AddToWorld();
 
     // Make active if required
-    if (sConfig.getConfig(CONFIG_BOOL_GRID_FORCE_LOAD_ALL_CREATURE) /*|| FlagsExtra & ACTIVE*/)
+    if (sConfig.getConfig(CONFIG_BOOL_GRID_FORCE_LOAD_ALL_CREATURE) || ExtraFlags & CREATURE_FLAG_EXTRA_ACTIVE)
         SetActiveObjectState(true);
 }
 
