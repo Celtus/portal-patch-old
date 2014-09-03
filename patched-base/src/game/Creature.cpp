@@ -2046,6 +2046,9 @@ bool Creature::LoadCreatureAddon(bool reload)
     if (cainfo->splineFlags & SPLINEFLAG_FLYING)
         SetLevitate(true);
 
+    if (cainfo->isActive)
+        SetActiveObjectState(true);
+
     if (cainfo->auras)
     {
         for (uint32 const* cAura = cainfo->auras; *cAura; ++cAura)
