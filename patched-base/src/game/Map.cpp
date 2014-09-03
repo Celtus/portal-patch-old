@@ -275,15 +275,12 @@ bool Map::EnsureGridLoaded(const Cell& cell)
     return false;
 }
 
-void Map::ForceLoadGrid(float x, float y)
+void Map::LoadGrid(const Cell& cell, bool no_unload)
 {
-    if (!IsLoaded(x, y))
-    {
-        CellPair p = MaNGOS::ComputeCellPair(x, y);
-        Cell cell(p);
-        EnsureGridLoadedAtEnter(cell);
+    EnsureGridLoaded(cell);
+
+    if (no_unload)
         getNGrid(cell.GridX(), cell.GridY())->setUnloadExplicitLock(true);
-    }
 }
 
 bool Map::Add(Player* player)
